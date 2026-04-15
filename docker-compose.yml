@@ -5,6 +5,12 @@ services:
     ports:
       - "8001:8000"
 
+  tracking:
+    build: ./services/tracking-service
+    container_name: tracking-service
+    ports:
+      - "8002:8000"
+
   api:
     build: ./services/api-gateway
     container_name: api-gateway
@@ -12,3 +18,4 @@ services:
       - "8000:8000"
     depends_on:
       - detection
+      - tracking

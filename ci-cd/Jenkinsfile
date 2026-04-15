@@ -10,6 +10,12 @@ pipeline {
             }
         }
 
+        stage('Stop Old Containers') {
+            steps {
+                bat 'docker-compose down || echo No containers to stop'
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 bat 'docker-compose build'

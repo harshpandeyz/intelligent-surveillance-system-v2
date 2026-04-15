@@ -1,0 +1,14 @@
+services:
+  detection:
+    build: ./services/detection-service
+    container_name: detection-service
+    ports:
+      - "8001:8000"
+
+  api:
+    build: ./services/api-gateway
+    container_name: api-gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - detection

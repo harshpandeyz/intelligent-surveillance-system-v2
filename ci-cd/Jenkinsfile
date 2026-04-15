@@ -10,9 +10,9 @@ pipeline {
             }
         }
 
-        stage('Stop Old Containers') {
+        stage('Force Clean Docker') {
             steps {
-                bat 'docker-compose down || echo No containers to stop'
+                bat 'docker rm -f detection-service tracking-service api-gateway || echo no containers'
             }
         }
 

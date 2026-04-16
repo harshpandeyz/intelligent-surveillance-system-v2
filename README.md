@@ -29,7 +29,7 @@ The **Intelligent Mob Surveillance System (IMS)** solves this by integrating:
 ## 🔥 Key Features
 
 * 🎥 Real-time CCTV / webcam monitoring
-* 🧠 AI-based mob detection (YOLOv8 ready)
+* 🧠 AI-based mob detection (YOLOv8)
 * 📊 Person counting & crowd analysis
 * 🚨 Suspicious activity detection (threshold-based)
 * 🔐 AES-256 encryption of video evidence
@@ -78,34 +78,52 @@ GitHub → Jenkins → Docker Build → Container Deployment → Running System
 
 ### 🤖 AI & Computer Vision
 
-\
+* YOLOv8 (Ultralytics)
+* OpenCV
+* NumPy
+* DeepSORT (for tracking - upcoming)
 
 ---
 
 ### ⚙️ Backend & APIs
 
-\
+* FastAPI
+* Python 3.10+
+* REST API Architecture
+* Uvicorn (ASGI server)
 
 ---
 
 ### 🐳 DevOps & Infrastructure
 
-
-\
+* Docker
+* Docker Compose
+* Jenkins (CI/CD Pipeline)
+* GitHub (Version Control)
 
 ---
 
 ### 🗄️ Database (Planned)
 
+* PostgreSQL / MongoDB (for logs & metadata)
+* Redis (for caching / streaming optimization)
+
 ---
 
 ### ⛓️ Blockchain (Planned)
 
-\
+* Ethereum
+* Web3.py
+* Smart Contracts (Solidity)
+* IPFS (optional for decentralized storage)
 
 ---
 
 ### 🎨 Frontend (Planned)
+
+* React.js
+* Tailwind CSS
+* Chart.js / Recharts (for analytics dashboard)
 
 ---
 
@@ -199,8 +217,36 @@ docker-compose up --build
 
 ## 📬 Contact Me
 
+* 👤 Name: Harsh Pandey
+* 📧 Email: [harshpandeyz@gmail.com](mailto:harshpandeyz@gmail.com) *(replace if needed)*
+* 🔗 GitHub: https://github.com/harshpandeyz
+* 💼 LinkedIn: https://www.linkedin.com/in/harshpandeyz *(update if needed)*
+
 ---
 
-## ⭐ If you like this project
+## ⭐ Support
 
-Give it a ⭐ on GitHub — it helps a lot!
+If you found this project useful:
+
+* Give it a ⭐ on GitHub
+* Share it with others
+* Contribute to improve it
+
+---
+
+## 📌 Future Enhancements
+
+* Real-time CCTV RTSP stream support
+* Advanced crowd behavior analysis
+* Face recognition module
+* Cloud deployment (AWS / GCP / Azure)
+* Kubernetes orchestration
+* Full frontend dashboard
+
+---
+
+## ⚠️ Disclaimer
+
+This project is for educational and research purposes. Ensure compliance with local surveillance and privacy laws before deploying in real-world environments.
+
+---

@@ -74,3 +74,5 @@ def log_event_on_chain(hash_hex: str, metadata: str, enc_file_path: str = None):
     receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
     return receipt.transactionHash.hex()
+
+# Web3 provider: connects to local Ganache instance

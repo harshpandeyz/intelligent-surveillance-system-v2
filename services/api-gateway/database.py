@@ -16,3 +16,4 @@ users_collection = db["users"]  # ✅ Add this line
 
 # Motor async client used for non-blocking MongoDB operations
 # users_collection: stores credentials and roles
+# events_collection: stores AI detection events with tx_hash

@@ -263,3 +263,5 @@ AI-powered CCTV surveillance with blockchain evidence logging.
 - Blockchain evidence logging via Ethereum smart contract
 
 - JWT authentication with role-based access control
+
+- Live camera stream with WebSocket support

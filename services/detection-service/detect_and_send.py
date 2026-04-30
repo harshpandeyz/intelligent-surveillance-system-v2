@@ -236,3 +236,4 @@ if __name__ == "__main__":
     main(camera_source=0, device='cpu')
 
 # YOLOv8n model used for lightweight real-time inference
+# Frames sampled at configurable interval for performance

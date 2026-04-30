@@ -261,3 +261,5 @@ AI-powered CCTV surveillance with blockchain evidence logging.
 - Real-time object detection via YOLOv8
 
 - Blockchain evidence logging via Ethereum smart contract
+
+- JWT authentication with role-based access control

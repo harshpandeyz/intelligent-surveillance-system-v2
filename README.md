@@ -256,3 +256,6 @@ AI-powered CCTV surveillance with blockchain evidence logging.
 
 ## Tech Stack
 - YOLOv8, FastAPI, MongoDB, Web3.py, React, Vite
+
+## Features
+- Real-time object detection via YOLOv8

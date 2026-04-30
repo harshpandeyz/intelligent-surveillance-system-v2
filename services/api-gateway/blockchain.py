@@ -76,3 +76,4 @@ def log_event_on_chain(hash_hex: str, metadata: str, enc_file_path: str = None):
     return receipt.transactionHash.hex()
 
 # Web3 provider: connects to local Ganache instance
+# SHA256 used for tamper-proof file hashing

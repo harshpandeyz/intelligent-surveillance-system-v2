@@ -253,3 +253,6 @@ This project is for educational and research purposes. Ensure compliance with lo
 
 ## Project Overview
 AI-powered CCTV surveillance with blockchain evidence logging.
+
+## Tech Stack
+- YOLOv8, FastAPI, MongoDB, Web3.py, React, Vite

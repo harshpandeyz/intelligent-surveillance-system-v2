@@ -268,3 +268,6 @@ AI-powered CCTV surveillance with blockchain evidence logging.
 
 ## Setup
 See docs/setup.md for full installation guide.
+
+## Architecture
+See docs/architecture.md for system design.

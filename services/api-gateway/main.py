@@ -281,3 +281,4 @@ async def startup_event():
 # ----------------------------
 import live_stream
 app.include_router(live_stream.router)
+# CORS configured for Vite dev server ports 5173-5175

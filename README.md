@@ -250,3 +250,24 @@ If you found this project useful:
 This project is for educational and research purposes. Ensure compliance with local surveillance and privacy laws before deploying in real-world environments.
 
 ---
+
+## Project Overview
+AI-powered CCTV surveillance with blockchain evidence logging.
+
+## Tech Stack
+- YOLOv8, FastAPI, MongoDB, Web3.py, React, Vite
+
+## Features
+- Real-time object detection via YOLOv8
+
+- Blockchain evidence logging via Ethereum smart contract
+
+- JWT authentication with role-based access control
+
+- Live camera stream with WebSocket support
+
+## Setup
+See docs/setup.md for full installation guide.
+
+## Architecture
+See docs/architecture.md for system design.

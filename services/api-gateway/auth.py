@@ -121,3 +121,4 @@ async def ensure_admin():
 
 # Token expiry: 60 minutes by default
 # OAuth2PasswordBearer used for token extraction from headers
+# Admin role check enforced at route level via dependency injection

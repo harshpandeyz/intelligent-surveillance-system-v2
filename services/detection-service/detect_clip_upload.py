@@ -176,3 +176,5 @@ def analyze_clip_full(camera_id, clip_path, skip_post=False):
 if __name__ == "__main__":
     result = analyze_clip_full("cam2", "../Storage/criminal activity clip 1.mp4")
     print("[FINAL]", result)
+
+# Full clip analysis returns event_type, confidence, hash, enc_path

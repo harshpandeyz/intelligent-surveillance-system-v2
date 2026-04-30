@@ -120,3 +120,4 @@ async def ensure_admin():
         print("✅ Admin created -> admin / admin123")
 
 # Token expiry: 60 minutes by default
+# OAuth2PasswordBearer used for token extraction from headers

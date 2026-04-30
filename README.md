@@ -250,3 +250,6 @@ If you found this project useful:
 This project is for educational and research purposes. Ensure compliance with local surveillance and privacy laws before deploying in real-world environments.
 
 ---
+
+## Project Overview
+AI-powered CCTV surveillance with blockchain evidence logging.

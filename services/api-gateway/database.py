@@ -13,3 +13,5 @@ db = client["cctv_ai"]
 # Collections
 events_collection = db["events"]
 users_collection = db["users"]  # ✅ Add this line
+
+# Motor async client used for non-blocking MongoDB operations

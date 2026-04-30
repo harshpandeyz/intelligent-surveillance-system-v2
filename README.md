@@ -265,3 +265,6 @@ AI-powered CCTV surveillance with blockchain evidence logging.
 - JWT authentication with role-based access control
 
 - Live camera stream with WebSocket support
+
+## Setup
+See docs/setup.md for full installation guide.

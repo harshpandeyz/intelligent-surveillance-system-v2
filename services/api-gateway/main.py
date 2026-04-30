@@ -3,7 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel
 
-from backend.auth import (
+# UPDATED IMPORTS
+from auth import (
     authenticate_user,
     create_access_token,
     get_current_user,
@@ -12,8 +13,8 @@ from backend.auth import (
     get_current_admin_user,
 )
 
-from backend.database import users_collection, events_collection
-from backend.blockchain import log_event_on_chain
+from database import users_collection, events_collection
+from blockchain import log_event_on_chain
 
 import json
 import os
@@ -21,7 +22,8 @@ import aiofiles
 import uuid
 from datetime import datetime
 
-from AI.detect_clip_upload import analyze_clip_full
+# UPDATED IMPORT
+from detect_clip_upload import analyze_clip_full
 
 # ----------------------------
 # App Init
@@ -112,12 +114,11 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 # ----------------------------
 @app.post("/classify_upload")
 async def classify_and_log_event(
-    camera_id: str = Form(...),
-    file: UploadFile = File(...),
-    user: dict = Depends(get_current_user)
+        camera_id: str = Form(...),
+        file: UploadFile = File(...),
+        user: dict = Depends(get_current_user)
 ):
     try:
-        # Save uploaded video
         os.makedirs("storage", exist_ok=True)
 
         raw_filename = f"{camera_id}_{uuid.uuid4().hex}.mp4"
@@ -126,7 +127,6 @@ async def classify_and_log_event(
         async with aiofiles.open(raw_path, "wb") as f:
             await f.write(await file.read())
 
-        # AI Detection
         result = analyze_clip_full(
             camera_id,
             raw_path,
@@ -138,11 +138,9 @@ async def classify_and_log_event(
         record["user"] = user["username"]
         record["created_at"] = datetime.utcnow()
 
-        # Save MongoDB
         res = await events_collection.insert_one(record)
         doc_id = res.inserted_id
 
-        # Blockchain
         try:
             metadata = json.dumps(result)
 
@@ -193,8 +191,8 @@ class EventModel(BaseModel):
 
 @app.post("/event")
 async def log_event(
-    event: EventModel,
-    user: dict = Depends(get_current_user)
+        event: EventModel,
+        user: dict = Depends(get_current_user)
 ):
     try:
         record = event.dict()
@@ -241,7 +239,7 @@ async def log_event(
 # ----------------------------
 @app.get("/events")
 async def get_all_events(
-    user: dict = Depends(get_current_user)
+        user: dict = Depends(get_current_user)
 ):
     query = {} if user["role"] == "admin" else {
         "user": user["username"]
@@ -263,7 +261,7 @@ async def get_all_events(
 # ----------------------------
 @app.get("/admin-dashboard")
 async def get_admin_dashboard(
-    user: dict = Depends(get_current_admin_user)
+        user: dict = Depends(get_current_admin_user)
 ):
     return {
         "message": f"Welcome Admin {user['username']}"
@@ -281,5 +279,5 @@ async def startup_event():
 # ----------------------------
 # Live Stream Routes
 # ----------------------------
-from backend.routes import live_stream
+import live_stream
 app.include_router(live_stream.router)

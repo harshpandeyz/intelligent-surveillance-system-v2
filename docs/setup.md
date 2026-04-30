@@ -11,3 +11,8 @@ pip install -r requirements.txt
 ```bash
 uvicorn services.api-gateway.main:app --reload
 ```
+
+## Run frontend
+```bash
+cd frontend && npm install && npm run dev
+```

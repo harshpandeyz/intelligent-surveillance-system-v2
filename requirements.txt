@@ -108,3 +108,4 @@ python-multipart==0.0.9
 
 # ---------- Missing from original ----------
 aiofiles==23.2.1
+python-jose[cryptography]==3.3.0

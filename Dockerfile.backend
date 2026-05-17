@@ -1,0 +1,50 @@
+FROM python:3.10-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgl1 \
+    libgomp1 \
+    curl \
+    wget \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+# Install PyTorch CPU wheels (explicit index — torch not in requirements.txt)
+RUN pip install --no-cache-dir \
+    torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 \
+    --index-url https://download.pytorch.org/whl/cpu
+
+# Install all other dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Guarantee these critical packages are present
+RUN pip install --no-cache-dir \
+    aiofiles==23.2.1 \
+    python-jose[cryptography]==3.3.0 \
+    passlib[bcrypt]==1.7.4 \
+    bcrypt==3.2.2 \
+    python-multipart==0.0.9 \
+    "py-solc-x==2.0.5"
+
+COPY backend/   ./backend/
+COPY AI/        ./AI/
+
+# Ensure package init files exist
+RUN touch /app/AI/__init__.py
+RUN touch /app/backend/routes/__init__.py
+RUN mkdir -p /app/storage
+
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+COPY contracts/ ./contracts/
+
+EXPOSE 8153
+
+ENTRYPOINT ["/app/entrypoint.sh"]

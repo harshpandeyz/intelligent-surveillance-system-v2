@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.production
+.env.docker
+.env.local
+
+# Node / Frontend
+node_modules/
+dist/
+frontend/dist/
+
+# Storage & encrypted footage
+Storage/
+storage/
+*.enc
+*.mp4
+
+# AI model weights (large binary — use Git LFS or exclude)
+*.pt
+/yolov8n.pt
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker caddy volumes
+caddy_data/
+caddy_config/
+
+# Python cache
+backend/__pycache__/
+AI/__pycache__/
+contracts/__pycache__/
+backend/routes/__pycache__/

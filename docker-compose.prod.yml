@@ -1,0 +1,108 @@
+# ============================================================
+#  MOB SURVEILLANCE SYSTEM — Production (Oracle Cloud Free)
+#  Run: docker compose -f docker-compose.prod.yml up -d
+# ============================================================
+
+services:
+
+  # ── Caddy (HTTPS reverse proxy) ───────────────────────────
+  caddy:
+    image: caddy:2-alpine
+    container_name: mob_caddy
+    restart: unless-stopped
+    ports:
+      - "8154:80"
+    environment:
+      - DOMAIN=${DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    networks:
+      - mob_net
+    depends_on:
+      - frontend
+      - backend
+
+  # ── MongoDB ───────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: mob_mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mob_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Ganache (local blockchain) ────────────────────────────
+  ganache:
+    image: trufflesuite/ganache:latest
+    container_name: mob_ganache
+    restart: unless-stopped
+    command: >
+      --deterministic
+      --accounts 10
+      --host 0.0.0.0
+      --port 8155
+      --networkId 1337
+    networks:
+      - mob_net
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - "node -e \"require('http').get('http://localhost:8155', r => process.exit(r.statusCode >= 200 && r.statusCode < 500 ? 0 : 1)).on('error', () => process.exit(1))\""
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  # ── FastAPI Backend ───────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: mob_backend
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    ports:
+      - "8153:8153"
+    volumes:
+      - ./storage:/app/storage
+      - ./AI/yolov8n.pt:/app/AI/yolov8n.pt:ro
+      - ./backend/chain:/app/backend/chain
+    depends_on:
+      mongo:
+        condition: service_healthy
+      ganache:
+        condition: service_healthy
+    networks:
+      - mob_net
+
+  # ── React Frontend (Nginx) ────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../Dockerfile.frontend
+      args:
+        VITE_API_URL: http://localhost:8154
+    container_name: mob_frontend
+    restart: unless-stopped
+    networks:
+      - mob_net
+
+volumes:
+  mongo_data:
+  caddy_data:
+  caddy_config:
+  caddy_logs:
+
+networks:
+  mob_net:
+    driver: bridge

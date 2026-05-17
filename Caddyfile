@@ -1,0 +1,81 @@
+http://{$DOMAIN} {
+    handle /login* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /signup* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /events* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /event* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /classify_upload* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+  handle /live_feed* {
+    reverse_proxy backend:8153 {
+        header_up Host {host}
+        header_up X-Forwarded-Proto {scheme}
+        flush_interval -1
+    }
+}
+    
+
+    handle /admin-dashboard* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /docs* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /openapi.json* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle /redoc* {
+        reverse_proxy backend:8153 {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    handle * {
+        reverse_proxy frontend:80
+    }
+
+    log {
+        output file /var/log/caddy/access.log
+    }
+}

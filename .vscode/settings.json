@@ -1,0 +1,6 @@
+{
+  // Ignore Tailwind's at-rules so VS Code's built-in CSS linter doesn't flag them
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore"
+}
